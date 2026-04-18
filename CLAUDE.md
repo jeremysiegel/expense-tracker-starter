@@ -15,17 +15,24 @@ No test runner is configured.
 
 ## Architecture
 
-Single-page React app (Vite + React 19). All application logic lives in `src/App.jsx` — there is no routing, no context, no external state library.
+Single-page React app (Vite + React 19). No routing, no context, no external state library.
 
-**State** is managed with `useState` entirely in `App`:
-- `transactions` — array of `{ id, description, amount, type, category, date }`
-- Form fields: `description`, `amount`, `type`, `category`
-- Filter fields: `filterType`, `filterCategory`
+**Component tree:**
+```
+App
+├── Summary          — computes and displays totals (income, expenses, balance)
+├── TransactionForm  — owns form state, calls onAdd(transaction) on submit
+└── TransactionList  — owns filter state, renders filtered transactions table
+```
 
-**Known bugs in the starter code:**
-- `amount` is stored as a string; `totalIncome`/`totalExpenses` use `+` on strings instead of `parseFloat`, so sums are wrong.
-- "Freelance Work" is typed `"expense"` but categorized `"salary"` — likely a data bug.
+**State ownership:**
+- `App` — `transactions` array (single source of truth), `CATEGORIES` constant
+- `TransactionForm` — `description`, `amount`, `type`, `category` (local form state)
+- `TransactionList` — `filterType`, `filterCategory` (local filter state)
+
+**Data flow:**
+- `App` passes `transactions` and `categories` down to all three children
+- `TransactionForm` receives `onAdd` callback; `App` appends the new transaction to state
+- Amounts are always stored as numbers; `TransactionForm` applies `parseFloat` on submit
 
 Styles are in `src/App.css` (component) and `src/index.css` (global/reset). CSS classes `income-amount` and `expense-amount` are shared between summary cards and table rows.
-
-Categories are a hardcoded array in `App`: `["food", "housing", "utilities", "transport", "entertainment", "salary", "other"]`.
