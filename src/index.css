@@ -4,8 +4,29 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #080c18;
+  --surface: #0f1628;
+  --surface-2: #161d35;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.13);
+  --text: #e8eaf0;
+  --text-dim: #9ca3af;
+  --text-muted: #4b5563;
+  --teal: #34d399;
+  --teal-glow: rgba(52, 211, 153, 0.12);
+  --coral: #fb7185;
+  --coral-glow: rgba(251, 113, 133, 0.12);
+  --gold: #fbbf24;
+  --gold-glow: rgba(251, 191, 36, 0.12);
+  --blue: #60a5fa;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: var(--text);
+  min-height: 100vh;
 }

@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#83a6ed", "#d0ed57"];
+const COLORS = ["#fbbf24", "#fb7185", "#60a5fa", "#34d399", "#a78bfa", "#fb923c", "#22d3ee"];
 
 function SpendingChart({ transactions }) {
   const expensesByCategory = transactions
@@ -19,9 +19,13 @@ function SpendingChart({ transactions }) {
       <h2>Spending by Category</h2>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} margin={{ top: 8, right: 16, left: 0, bottom: 4 }}>
-          <XAxis dataKey="name" tick={{ fontSize: 13 }} />
-          <YAxis tickFormatter={(v) => `$${v}`} tick={{ fontSize: 13 }} />
-          <Tooltip formatter={(value) => `$${value}`} />
+          <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#4b5563', fontFamily: 'Outfit', letterSpacing: '0.04em' }} axisLine={{ stroke: 'rgba(255,255,255,0.07)' }} tickLine={false} />
+          <YAxis tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: '#4b5563', fontFamily: 'DM Mono' }} axisLine={false} tickLine={false} />
+          <Tooltip
+            formatter={(value) => [`$${value}`, 'Amount']}
+            contentStyle={{ background: '#0f1628', border: '1px solid rgba(255,255,255,0.13)', borderRadius: 0, fontFamily: 'Outfit', fontSize: 13, color: '#e8eaf0' }}
+            cursor={{ fill: 'rgba(255,255,255,0.04)' }}
+          />
           <Bar dataKey="value" name="Amount">
             {data.map((_, index) => (
               <Cell key={index} fill={COLORS[index % COLORS.length]} />
